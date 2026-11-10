@@ -59,6 +59,7 @@ svg text{font-weight:400}
 .seg .bbtn{min-width:88px;padding:6px 18px}
 .btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
 .btns .bbtn{min-width:0;padding:6px 10px;font-size:clamp(17px,2.2vw,22px)}
+.btns.ice{grid-template-columns:1fr 1.9fr 1fr}
 .btns.one{grid-template-columns:minmax(0,320px);justify-content:center;margin:14px 0 0}
 .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin:10px 0 0;font-size:clamp(15px,1.7vw,18px);color:var(--sub)}
 .legend i{display:inline-block;width:22px;height:6px;border-radius:3px;vertical-align:middle;margin-right:5px}
@@ -111,6 +112,8 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
   .bbtn{font-size:20px;min-height:54px;padding:6px 20px}
   .btns{gap:7px}
   .btns .bbtn{font-size:16px;padding:4px 6px;min-height:58px}
+  .btns.ice{grid-template-columns:1fr 1fr}
+  .btns.ice #drop{grid-column:1/-1;order:3}
   .seg{gap:8px}
   .seg .lbl{width:100%;text-align:center}
   .seg .bbtn{min-width:0;flex:1;max-width:120px}
@@ -173,8 +176,9 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
     <div class="legend"><span><i style="background:#f5b400"></i>햇빛</span><span><i style="background:#ff7a2b"></i>땅이 내보내는 열</span><span><i style="background:#5b6573;width:10px;height:10px;border-radius:50%"></i>이산화 탄소</span></div>
     <p class="say" id="ghSay"></p>
     <div class="note">
-      <p><b>온실 효과</b> : 햇빛에 데워진 땅이 내보내는 열을 공기 속 기체가 붙잡아, 지구를 따뜻하게 하는 현상</p>
-      <p><b>온실 가스</b> : 열을 붙잡는 기체 — 이산화 탄소 · 메테인 · 수증기. 온실 효과가 없으면 지구 평균 기온은 약 영하 18℃예요.</p>
+      <p><b>온실 효과</b> : 햇빛에 데워진 땅의 열을 공기 속 기체가 붙잡아 지구를 따뜻하게 하는 현상</p>
+      <p><b>온실 가스</b> : 열을 붙잡는 기체(이산화 탄소 · 메테인 · 수증기) — 없으면 지구는 약 영하 18℃예요.</p>
+      <p><b>금성</b> : 이산화 탄소 공기가 지구보다 약 90배 두꺼워 열이 갇혀, 표면이 약 460℃나 돼요.</p>
     </div>
   </div>
 
@@ -205,9 +209,9 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
 <section class="panel" id="p1">
   <div class="card">
     <h2>땅 위 얼음과 물에 뜬 얼음, 녹으면 어떻게 될까?</h2>
-    <div class="btns">
+    <div class="btns ice">
       <button class="bbtn warm" id="melt">녹이기</button>
-      <button class="bbtn" id="add">얼음 하나 더 넣기 (컵 B)</button>
+      <button class="bbtn" id="drop">주사위 위 얼음을 컵 A 물에 떨어뜨리기</button>
       <button class="bbtn white" id="icReset">처음부터</button>
     </div>
     <div class="stage">
@@ -218,20 +222,19 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
         <rect width="640" height="400" fill="#f6fbff"/>
         <!-- 컵 A -->
         <rect x="40" y="70" width="250" height="280" rx="14" fill="#fff"/>
-        <use href="#house" x="234" y="230"/>
-        <rect x="100" y="232" width="118" height="118" rx="10" fill="#fff" stroke="#9aa9b8" stroke-width="3"/>
-        <g fill="#24407e"><circle cx="126" cy="258" r="9"/><circle cx="159" cy="291" r="9"/><circle cx="192" cy="324" r="9"/></g>
+        <use href="#house" x="52" y="230"/>
+        <rect x="166" y="232" width="118" height="118" rx="10" fill="#fff" stroke="#9aa9b8" stroke-width="3"/>
+        <g fill="#24407e"><circle cx="192" cy="258" r="9"/><circle cx="225" cy="291" r="9"/><circle cx="258" cy="324" r="9"/></g>
         <rect id="iA" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
         <rect id="wA" x="43" width="244" fill="#3b8fe0" opacity=".5"/>
         <!-- 컵 B -->
         <rect x="350" y="70" width="250" height="280" rx="14" fill="#fff"/>
         <use href="#house" x="544" y="230"/>
         <rect id="iB1" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
-        <rect id="iB2" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
         <rect id="wB" x="353" width="244" fill="#3b8fe0" opacity=".5"/>
         <!-- 선 · 컵 테두리 · 글 -->
         <g stroke="#24407e" stroke-width="3" stroke-dasharray="10 6"><line x1="40" y1="232" x2="290" y2="232"/><line x1="350" y1="232" x2="600" y2="232"/></g>
-        <text x="48" y="226" font-size="15" fill="#24407e">물 높이 선</text>
+        <text x="358" y="226" font-size="15" fill="#24407e">물 높이 선</text>
         <g fill="none" stroke="#8cc4e8" stroke-width="5"><path d="M40 70 V336 Q40 350 54 350 H276 Q290 350 290 336 V70"/><path d="M350 70 V336 Q350 350 364 350 H586 Q600 350 600 336 V70"/></g>
         <text id="stA" x="165" y="50" font-size="21" text-anchor="middle"></text>
         <text id="stB" x="475" y="50" font-size="21" text-anchor="middle"></text>
@@ -239,7 +242,7 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
       </svg>
     </div>
     <p class="say" id="icSay"></p>
-    <div class="note"><p><b>주사위</b>는 땅, <b>파란 물</b>은 바다, <b>집 스티커</b>는 바닷가 마을이에요.</p><p><b>해수면 상승</b> : 바닷물 높이가 올라가는 것 — 땅 위 빙하 · 빙상이 녹은 물이 바다로 흘러 들어서 생겨요.</p></div>
+    <div class="note"><p><b>주사위</b>는 땅, <b>파란 물</b>은 바다, <b>집 스티커</b>는 바닷가 마을이에요.</p><p><b>해수면 상승</b> : 해수면이 올라가는 것 — 땅 위 빙하 · 빙상이 녹은 물이 바다로 흘러들어 생겨요.</p></div>
   </div>
 </section>
 
@@ -279,7 +282,7 @@ footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color
       </svg>
     </div>
     <p class="say" id="slSay"></p>
-    <div class="note"><p><b>빙상</b> : 땅을 넓게 덮은 아주 큰 빙하 — 지금 지구에는 남극과 그린란드 두 곳에만 있어요.</p><p><b>해빙</b> : 바닷물이 언 얼음 — 북극 바다는 해빙으로 덮여 있어요. 건물 한 층은 약 3m로 어림했어요.</p></div>
+    <div class="note"><p><b>빙상</b> : 땅을 넓게 덮은 아주 큰 빙하 — 지금은 남극과 그린란드 두 곳에만 있어요.</p><p><b>해빙</b> : 바닷물이 언 얼음 — 북극 바다는 해빙이 덮고 있어요. 건물 한 층은 약 3m로 어림했어요.</p></div>
   </div>
 </section>
 
@@ -340,7 +343,7 @@ $('#share').onclick=async()=>{
 /* ---------- ① 온실 효과 ---------- */
 const LV=[
   {n:4, trap:2,f:.3, haze:.08,word:'덜 따뜻해요',say:'이산화 탄소가 적으면 붙잡히는 열이 적어요. 땅이 내보내는 열 화살표 6개 중 4개가 우주로 빠져나가요.'},
-  {n:9, trap:3,f:.55,haze:.18,word:'따뜻해요',  say:'지금 공기 속 이산화 탄소는 200여 년 전의 약 1.5배예요. 열 화살표 6개 중 3개가 공기에 갇혀 땅으로 되돌아와요.'},
+  {n:9, trap:3,f:.55,haze:.18,word:'따뜻해요',  say:'석탄 · 석유 · 천연가스를 태워 지금 공기 속 이산화 탄소는 약 250년 전의 1.5배예요. 열 화살표 6개 중 3개가 공기에 갇혀 땅으로 되돌아와요.'},
   {n:18,trap:5,f:.85,haze:.32,word:'더 더워져요',say:'온실 가스가 늘면 열이 더 많이 갇혀 지구가 더워져요. 6개 중 5개가 갇혀요. 이렇게 지구 평균 기온이 점점 올라가는 것이 지구 온난화예요.'},
 ];
 let seed=11; const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
@@ -414,7 +417,7 @@ $('#heat').onclick=async()=>{
 btReset();
 
 /* ---------- ② 얼음 녹이기 ---------- */
-const L=232, D=24, IW=70, IH=56, AX=159, B1=480, B2=398;
+const L=232, D=14, IW=70, IH=56, AX=225, AD=131, B1=480;   // D : 얼음 하나가 올리는 물 높이(몇 mm쯤)
 let ic, icRun=0, icBusy=false;
 function iceRect(el,cx,v,topOf){
   const s=Math.cbrt(Math.max(0,v));
@@ -424,18 +427,15 @@ function iceRect(el,cx,v,topOf){
 function icDraw(){
   const lvA=L-ic.rA, lvB=L-ic.rB;
   attr($('#wA'),{y:lvA,height:347-lvA}); attr($('#wB'),{y:lvB,height:347-lvB});
-  iceRect($('#iA'),AX,ic.a,s=>L-IH*s);                 // 주사위 윗면에 얹힘
-  iceRect($('#iB1'),B1,ic.b1,s=>lvB-.12*IH*s);          // 물에 떠서 조금만 위로 나옴
-  if(ic.b2===null) $('#iB2').style.display='none';
-  else iceRect($('#iB2'),B2,ic.b2,s=>ic.b2top??lvB-.12*IH*s);
+  if(ic.aTop!==null) iceRect($('#iA'),ic.ax,ic.a,()=>ic.aTop);   // 떨어지는 중
+  else if(ic.aFloat) iceRect($('#iA'),AD,ic.a,s=>lvA-.12*IH*s);  // 물에 떠 있음
+  else iceRect($('#iA'),AX,ic.a,s=>L-IH*s);                       // 주사위 윗면에 얹힘
+  iceRect($('#iB1'),B1,ic.b1,s=>lvB-.12*IH*s);
 }
 function stat(id,text,color){ $(id).textContent=text; $(id).setAttribute('fill',color); }
-function icButtons(){
-  const left=ic.a>0||ic.b1>0||(ic.b2!==null&&ic.b2>0);
-  $('#melt').disabled=icBusy||!left; $('#add').disabled=icBusy||ic.b2!==null;
-}
+function icButtons(){ $('#melt').disabled=icBusy||(ic.a<=0&&ic.b1<=0); $('#drop').disabled=icBusy||ic.dropped; }
 function icReset(){
-  icRun++; icBusy=false; ic={a:1,b1:1,b2:null,b2top:null,rA:0,rB:0};
+  icRun++; icBusy=false; ic={a:1,b1:1,aFloat:false,aTop:null,ax:AX,rA:0,rB:0,dropped:false};
   stat('#stA','',''); stat('#stB','','');
   $('#icSay').textContent='컵 A는 주사위(땅) 위에, 컵 B는 물(바다) 위에 얼음을 놓았어요. 집 스티커는 물 높이 선 바로 위에 붙였어요. ‘녹이기’를 눌러 봐요!';
   icDraw(); icButtons();
@@ -443,28 +443,35 @@ function icReset(){
 $('#icReset').onclick=icReset;
 $('#melt').onclick=async()=>{
   if(icBusy) return; icBusy=true; icButtons();
-  const run=icRun, a0=ic.a, b10=ic.b1, b20=ic.b2, hadA=a0>0;
-  if(hadA) stat('#stA','녹는 중…','#6c7a8a'); stat('#stB','녹는 중…','#6c7a8a');
-  const ok=await tween(5000,e=>{ ic.a=a0*(1-e); ic.rA=D*(1-ic.a); ic.b1=b10*(1-e); if(b20!==null) ic.b2=b20*(1-e); icDraw(); },()=>run===icRun);
+  const run=icRun, a0=ic.a, b10=ic.b1, r0=ic.rA, onDie=!ic.aFloat&&a0>0;
+  if(a0>0) stat('#stA','녹는 중…','#6c7a8a'); if(b10>0) stat('#stB','녹는 중…','#6c7a8a');
+  const ok=await tween(5000,e=>{ ic.a=a0*(1-e); if(onDie) ic.rA=r0+D*(a0-ic.a); ic.b1=b10*(1-e); icDraw(); },()=>run===icRun);
   if(!ok) return;
-  stat('#stA','물이 올라 집이 잠겼어요!','#c8283a');
-  const added=ic.b2!==null;
-  stat('#stB',added?'녹아도 물 높이 그대로예요':'선 그대로예요','#1f8a57');
-  $('#icSay').innerHTML=!added
-    ?'주사위 위 얼음이 녹자 컵 A의 물이 집 스티커 위로 올라왔지만, 컵 B는 선 그대로였어요.<br><b>땅 위의 얼음이 녹아 바다로 흘러 들면 해수면이 높아져요.</b>'
-    :(hadA?'주사위 위 얼음이 녹자 컵 A의 물이 집 스티커 위로 올라왔어요. ':'')+'컵 B는 얼음이 다 녹아도 물 높이가 그대로예요.<br><b>바다에 들어올 때 이미 녹을 물만큼 물을 밀어 올렸기 때문이에요.</b>';
+  if(b10>0) stat('#stB','선 그대로예요','#1f8a57');
+  if(onDie){
+    stat('#stA','집 스티커가 잠겼어요!','#c8283a');
+    $('#icSay').innerHTML='얼음이 다 녹자 컵 A는 집 스티커가 잠겼지만, 컵 B는 선 그대로였어요.<br><b>땅 위의 얼음이 녹아 바다로 흘러들면 해수면이 높아져요.</b>';
+  } else {
+    stat('#stA','떠서 녹을 땐 더 오르지 않아요','#1f8a57');
+    $('#icSay').innerHTML='떠 있던 얼음은 다 녹아도 물 높이가 더 오르지 않았어요.<br><b>물에 뜬 얼음은 녹을 물만큼 이미 물을 밀어내고 있어서예요.</b>';
+  }
   icBusy=false; icButtons();
 };
-$('#add').onclick=async()=>{
-  if(icBusy||ic.b2!==null) return; icBusy=true; const run=icRun, alive=()=>run===icRun;
-  ic.b2=1; icButtons();
-  const touch=L-ic.rB-IH;                                  // 얼음 밑면이 물에 닿는 자리
-  if(!await tween(520,(e,t)=>{ ic.b2top=lerp(-IH,touch,t*t); icDraw(); },alive)) return;
-  const r0=ic.rB, fin=L-(r0+D)-.12*IH;
-  if(!await tween(420,e=>{ ic.rB=r0+D*e; ic.b2top=lerp(touch,fin,e); icDraw(); },alive)) return;
-  ic.b2top=null; icDraw();
-  stat('#stB','넣는 순간 물이 올라갔어요!','#e0661c');
-  $('#icSay').innerHTML='얼음을 넣는 순간 컵 B의 물 높이가 올라갔어요!<br><b>바다에 들어오는 순간 이미 물을 밀어 올려요.</b> 그래서 녹아도 더 오르지 않아요.';
+$('#drop').onclick=async()=>{
+  if(icBusy||ic.dropped) return; icBusy=true; ic.dropped=true; icButtons();
+  const run=icRun, alive=()=>run===icRun;
+  if(ic.a<=0){   // 주사위 위 얼음이 이미 녹았으면 하나 더 올렸다가 떨어뜨려요
+    ic.a=1; ic.aFloat=false; icDraw(); stat('#stA','주사위 위에 얼음을 하나 더 올렸어요','#6c7a8a');
+    if(!await tween(800,()=>{},alive)) return;
+  }
+  stat('#stA','','');
+  ic.ax=AX; ic.aTop=L-IH;
+  if(!await tween(450,e=>{ ic.ax=lerp(AX,AD,e); icDraw(); },alive)) return;      // 주사위 밖으로 밀려남
+  const r0=ic.rA, fin=L-(r0+D)-.12*IH;
+  if(!await tween(450,e=>{ ic.rA=r0+D*e; ic.aTop=lerp(L-IH,fin,e); icDraw(); },alive)) return;   // 물에 들어오는 순간 물이 올라감
+  ic.aTop=null; ic.aFloat=true; icDraw();
+  stat('#stA','떨어지는 순간 물이 올라갔어요!','#e0661c');
+  $('#icSay').innerHTML='얼음이 떨어지는 순간 컵 A의 물 높이가 올라갔어요. 빙하가 바다로 무너져 들어갈 때와 같아요.<br><b>땅 위 얼음이 바다로 들어오는 순간 물 높이가 올라가요. 그 뒤 떠서 녹을 때는 더 오르지 않아요.</b>';
   icBusy=false; icButtons();
 };
 icReset();
@@ -482,7 +489,7 @@ const PX=6, SEA=400;   // 1m = 6px, 지금 해수면 y=400
 const SH={
   g:{h:7.4,big:'약 7.4m',sub:'건물 약 2~3층 높이',say:'그린란드 빙상이 다 녹으면 해수면은 약 7.4m 올라가요.<br>한 층을 약 3m로 어림하면 <b>건물 약 2~3층 높이</b>예요.'},
   a:{h:58, big:'약 58m', sub:'건물 약 19층 높이',say:'남극 빙상이 다 녹으면 해수면은 약 58m 올라가요.<br>한 층을 약 3m로 어림하면 <b>건물 약 19층 높이</b>예요.'},
-  n:{h:0,  big:'거의 그대로',sub:'북극곰의 사냥터가 줄어요',say:'북극 해빙이 녹으면 해수면은 거의 그대로예요. 바다에 들어올 때 이미 녹을 물만큼 바닷물을 밀어 올렸기 때문이에요.<br><b>하지만 북극곰은 해빙 위에서 물범을 사냥하던 곳을 잃어요.</b>'},
+  n:{h:0,  big:'거의 그대로',sub:'북극곰의 사냥터가 줄어요',say:'북극 해빙은 녹을 물만큼 이미 물을 밀어내고 있어서, 녹아도 해수면이 거의 그대로예요.<br><b>하지만 북극곰은 해빙 위의 고리무늬물범 사냥터를 잃어요.</b>'},
 };
 let slH=0, slRun=0;
 function setFlood(h){ slH=h; const y=SEA-h*PX; attr($('#flood'),{y,height:h*PX}); attr($('#mark'),{y1:y,y2:y,opacity:h>.3?1:0}); }
@@ -509,11 +516,11 @@ setFlood(0); slIntro();
 
 /* ---------- ④ OX ---------- */
 const OX=[
-  ['기후는 그날그날의 날씨를 말한다.',false,'그날그날의 상태는 날씨예요. 기후는 한 지역에서 30년 넘게 되풀이되는 평균 날씨예요.'],
+  ['기후는 그날그날의 날씨를 말한다.',false,'그날그날의 상태는 날씨예요. 기후는 한 지역의 30년 동안의 날씨를 평균한 것이에요.'],
   ['이산화 탄소는 열을 붙잡는 온실 가스이다.',true,'이산화 탄소 · 메테인 · 수증기처럼 열을 붙잡는 기체가 온실 가스예요.'],
-  ['온실 효과가 없으면 지구는 지금보다 훨씬 추워진다.',true,'온실 효과가 없으면 지구 평균 기온은 약 영하 18℃예요.'],
-  ['북극 바다에 뜬 해빙이 녹으면 해수면이 크게 올라간다.',false,'바다에 뜬 해빙은 녹아도 해수면이 거의 그대로예요. 바다에 들어올 때 이미 녹을 물만큼 바닷물을 밀어 올렸어요.'],
-  ['남극과 그린란드의 빙상이 녹으면 해수면이 올라간다.',true,'땅 위의 빙상이 녹은 물이 바다로 흘러 들어 해수면이 높아져요.'],
+  ['온실 효과가 없으면 지구는 지금보다 훨씬 추워진다.',true,'온실 효과가 없으면 지구는 약 영하 18℃예요.'],
+  ['북극 바다에 뜬 해빙이 녹으면 해수면이 크게 올라간다.',false,'바다에 뜬 해빙은 녹을 물만큼 이미 물을 밀어내고 있어서, 녹아도 해수면이 거의 그대로예요.'],
+  ['남극과 그린란드의 빙상이 녹으면 해수면이 올라간다.',true,'땅 위의 빙상이 녹은 물이 바다로 흘러들어 해수면이 높아져요.'],
 ];
 let qi=0, score=0;
 $('#qt').textContent=OX.length;
