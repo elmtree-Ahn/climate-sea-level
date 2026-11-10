@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이산화 탄소가 늘면 바닷물은 왜 높아질까? | 어게인 실험과학 수학학원</title>
+<meta name="description" content="온실 효과, 땅 위 얼음과 물에 뜬 얼음, 남극과 그린란드 빙상, OX 퀴즈로 이산화 탄소와 해수면 상승을 알아봐요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#e8f4fd; --sky2:#bfe0f8; --blue:#3a9ae0; --blue-d:#2476b8; --line:#d3e7f5;
+  --warm:#ff8a3d; --warm-d:#e0661c; --warm-s:#fff0e3;
+  --navy:#24407e; --navy-d:#172c5c; --navy-s:#e7ecf8;
+  --ruby:#d81e4a; --ruby-d:#a3102f; --ink:#33414f; --sub:#6c7a8a;
+  --mint:#dcf5ea; --mint2:#8fdcb8; --gold:#ffb800;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{margin:0;color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-weight:500;background:#fff}
+body{min-height:100vh;display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation}
+.jua,header,nav,.bbtn,.say,.card h2,.lbl,.quiz,footer,.toast,svg text{font-family:"Jua","Noto Sans KR",sans-serif}
+
+.bbtn{font-size:22px;min-height:60px;min-width:140px;padding:8px 26px;color:#fff;background:var(--navy);border-radius:999px;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.15),0 5px 0 var(--navy-d);word-break:keep-all;line-height:1.2}
+.bbtn:active{transform:translateY(3px)}
+.bbtn:disabled{opacity:.4;cursor:default;transform:none}
+.bbtn.warm{background:var(--warm);box-shadow:inset 0 -6px 0 rgba(0,0,0,.1),0 5px 0 var(--warm-d)}
+.bbtn.white{background:#fff;color:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.05),0 5px 0 var(--line);border:3px solid var(--sky2)}
+.bbtn.white.on{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.15),0 5px 0 var(--navy-d)}
+
+header{position:sticky;top:0;z-index:30;background:#fff;box-shadow:0 3px 0 var(--line);padding:8px 16px}
+.head-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.titles{flex:1;min-width:0}
+.brand{font-size:16px;color:var(--sub)}
+h1{margin:0;font-weight:400;font-size:clamp(20px,3.2vw,32px);color:var(--navy);line-height:1.15;word-break:keep-all}
+.share{min-width:0;font-size:18px;min-height:50px;padding:6px 22px;flex:none}
+
+nav{max-width:1240px;width:100%;margin:10px auto 0;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tab{min-height:54px;border-radius:18px;background:var(--sky);font-size:clamp(16px,2vw,24px);line-height:1.15;padding:4px;
+  border:3px solid transparent;word-break:keep-all;text-align:center}
+.tab.on{background:var(--navy-s);border-color:var(--navy);color:var(--navy)}
+
+main{flex:1;max-width:1240px;width:100%;margin:0 auto;padding:10px 16px 16px}
+.panel{display:none}
+.panel.on{display:block}
+.duo{display:grid;gap:14px}
+@media (min-width:900px){.duo{grid-template-columns:1fr 1fr}}
+.card{background:var(--sky);border-radius:24px;padding:12px;margin-bottom:14px}
+.duo .card{margin-bottom:0}
+.card h2{margin:2px 0 10px;font-weight:400;text-align:center;color:var(--navy);font-size:clamp(22px,2.8vw,30px);line-height:1.2;word-break:keep-all}
+.stage{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px var(--line)}
+.stage svg{display:block;width:100%;height:auto;max-height:min(52vh,560px)}
+svg text{font-weight:400}
+.seg{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.seg .lbl{font-size:clamp(19px,2.2vw,24px);color:var(--navy);margin-right:2px}
+.seg .bbtn{min-width:88px;padding:6px 18px}
+.btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.btns .bbtn{min-width:0;padding:6px 10px;font-size:clamp(17px,2.2vw,22px)}
+.btns.one{grid-template-columns:minmax(0,320px);justify-content:center;margin:14px 0 0}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin:10px 0 0;font-size:clamp(15px,1.7vw,18px);color:var(--sub)}
+.legend i{display:inline-block;width:22px;height:6px;border-radius:3px;vertical-align:middle;margin-right:5px}
+.say{min-height:3.1em;margin:12px 4px 10px;text-align:center;font-size:clamp(19px,2.3vw,26px);line-height:1.4;word-break:keep-all}
+.say b{font-weight:400;color:var(--warm-d)}
+.note{margin:0;background:#fff;border-radius:16px;padding:10px 14px;font-size:clamp(15px,1.8vw,18px);line-height:1.6;color:var(--ink);word-break:keep-all}
+.note b{color:var(--navy)}
+.note p{margin:0}
+.note p+p{margin-top:4px}
+.mol{animation:bob 2.6s ease-in-out infinite alternate}
+.rays line{animation:dash .9s linear infinite}
+.fade{transition:opacity .6s}
+@keyframes bob{to{transform:translateY(-6px)}}
+@keyframes dash{to{stroke-dashoffset:-24}}
+
+/* OX */
+.quiz{max-width:880px;margin:0 auto;text-align:center}
+.score{font-size:24px;color:var(--sub)}
+.score b{font-weight:400;color:var(--warm-d);font-size:1.3em}
+.q{background:var(--sky);border-radius:28px;padding:24px 20px;margin:10px 0;font-size:clamp(24px,3.4vw,36px);line-height:1.35;word-break:keep-all;min-height:130px;display:grid;place-items:center}
+.ox{display:flex;gap:20px;justify-content:center}
+.ox button{width:min(42%,220px);aspect-ratio:1.45;border-radius:32px;font-size:clamp(70px,12vw,100px);line-height:1;color:#fff;font-family:system-ui,sans-serif;font-weight:800}
+.ox .o{background:var(--blue);box-shadow:0 8px 0 var(--blue-d)}
+.ox .x{background:var(--ruby);box-shadow:0 8px 0 var(--ruby-d)}
+.ox button:active{transform:translateY(4px)}
+.ox button:disabled{opacity:.4}
+.fb{min-height:66px;margin:16px 0 8px;font-size:clamp(21px,2.8vw,28px);line-height:1.36;word-break:keep-all}
+.fb.good{color:#1f8a57}.fb.bad{color:#c8283a}
+.row{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
+
+footer span{white-space:nowrap}
+footer{background:var(--sky);padding:14px;text-align:center;font-size:17px;color:var(--navy);line-height:1.6;word-break:keep-all}
+.toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:20px;padding:12px 26px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99;white-space:nowrap}
+.toast.on{opacity:1}
+.conf{position:fixed;top:-20px;width:14px;height:14px;z-index:98;pointer-events:none;animation:fall linear forwards}
+.spk{position:fixed;z-index:97;pointer-events:none;font-size:28px;line-height:1;color:#ffc93c;text-shadow:0 0 6px #fff;animation:spk .9s ease-out forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes spk{0%{transform:translate(-50%,-50%) scale(.3);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3) rotate(120deg);opacity:0}}
+
+@media (max-width:760px){
+  header{padding:6px 10px}
+  .head-in{gap:6px}
+  .brand{font-size:13px}
+  .share.bbtn{font-size:15px;min-height:44px;padding:4px 12px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15),0 3px 0 var(--navy-d)}
+  nav{margin-top:8px;padding:0 10px;gap:5px}
+  .tab{min-height:48px;border-radius:14px}
+  main{padding:8px 10px 12px}
+  .card{padding:10px 8px;border-radius:20px}
+  .stage{border-radius:14px}
+  .bbtn{font-size:20px;min-height:54px;padding:6px 20px}
+  .btns{gap:7px}
+  .btns .bbtn{font-size:16px;padding:4px 6px;min-height:58px}
+  .seg{gap:8px}
+  .seg .lbl{width:100%;text-align:center}
+  .seg .bbtn{min-width:0;flex:1;max-width:120px}
+}
+</style>
+</head>
+<body>
+<header><div class="head-in">
+  <div class="titles"><div class="brand">어게인 실험과학 수학학원</div><h1>이산화 탄소가 늘면 바닷물은 왜 높아질까?</h1></div>
+  <button class="bbtn share" id="share">공유하기</button>
+</div></header>
+
+<nav>
+  <button class="tab on" data-t="0">온실 효과</button>
+  <button class="tab" data-t="1">얼음 녹이기</button>
+  <button class="tab" data-t="2">남극과 그린란드</button>
+  <button class="tab" data-t="3">OX 퀴즈</button>
+</nav>
+
+<main>
+<!-- ① 온실 효과 -->
+<section class="panel on" id="p0">
+  <div class="duo">
+  <div class="card">
+    <h2>이산화 탄소가 늘면 열은 어떻게 될까?</h2>
+    <div class="seg" id="co2"><span class="lbl">이산화 탄소</span>
+      <button class="bbtn white" data-v="0">적게</button><button class="bbtn white on" data-v="1">지금</button><button class="bbtn white" data-v="2">많이</button>
+    </div>
+    <div class="stage">
+      <svg id="gh" viewBox="0 0 640 360" role="img" aria-label="햇빛, 땅이 내보내는 열, 공기 속 이산화 탄소, 지구 온도계 그림">
+        <defs>
+          <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cde8ff"/><stop offset="1" stop-color="#f2faff"/></linearGradient>
+          <g id="mol"><circle cx="-10" r="6" fill="#f07a7a"/><circle cx="10" r="6" fill="#f07a7a"/><circle r="7" fill="#5b6573"/></g>
+          <g id="heatA"><path d="M0 36 c-7 -4 -7 -8 0 -12 s7 -8 0 -12 s-6 -5 0 -8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M-9 7 L0 -6 L9 7 Z" fill="currentColor"/></g>
+        </defs>
+        <rect width="640" height="360" fill="url(#gSky)"/>
+        <rect width="640" height="58" fill="#e6e3ff"/>
+        <g fill="#fff"><circle cx="150" cy="16" r="2.5"/><circle cx="260" cy="38" r="2"/><circle cx="380" cy="14" r="2.5"/><circle cx="470" cy="34" r="2"/><circle cx="530" cy="12" r="2"/></g>
+        <text x="96" y="38" font-size="22" fill="#5a4fb0">우주</text>
+        <rect id="haze" class="fade" x="0" y="82" width="548" height="104" fill="#9fb0c8" opacity=".18"/>
+        <text x="12" y="140" font-size="20" fill="#4a5a70">공기</text>
+        <g id="mols"></g>
+        <g class="rays" stroke="#f5b400" stroke-width="5" stroke-dasharray="14 10" stroke-linecap="round">
+          <line x1="52" y1="56" x2="66" y2="270"/><line x1="66" y1="52" x2="104" y2="270"/>
+        </g>
+        <path d="M60 282 l6 10 l6 -10Z M98 282 l6 10 l6 -10Z" fill="#f5b400"/>
+        <circle cx="40" cy="28" r="22" fill="#ffd23f" stroke="#f5b400" stroke-width="4"/>
+        <path d="M0 290 Q160 276 320 288 T640 286 V360 H0Z" fill="#8fd18a"/>
+        <path d="M0 322 Q200 312 400 322 T640 320 V360 H0Z" fill="#c99a6b"/>
+        <text x="14" y="350" font-size="20" fill="#fff">땅</text>
+        <g id="arrows"></g>
+        <rect x="552" y="66" width="80" height="282" rx="16" fill="#fff" stroke="#d3e7f5" stroke-width="3"/>
+        <text x="592" y="94" font-size="16" fill="#24407e" text-anchor="middle">지구 온도</text>
+        <rect x="582" y="106" width="20" height="190" rx="10" fill="#fff" stroke="#c3d3e2" stroke-width="3"/>
+        <g stroke="#c3d3e2" stroke-width="3"><line x1="606" y1="130" x2="614" y2="130"/><line x1="606" y1="170" x2="614" y2="170"/><line x1="606" y1="210" x2="614" y2="210"/><line x1="606" y1="250" x2="614" y2="250"/></g>
+        <rect id="thFill" x="586" y="200" width="12" height="100" fill="#ef4b3c"/>
+        <circle cx="592" cy="310" r="18" fill="#ef4b3c"/>
+      </svg>
+    </div>
+    <div class="legend"><span><i style="background:#f5b400"></i>햇빛</span><span><i style="background:#ff7a2b"></i>땅이 내보내는 열</span><span><i style="background:#5b6573;width:10px;height:10px;border-radius:50%"></i>이산화 탄소</span></div>
+    <p class="say" id="ghSay"></p>
+    <div class="note">
+      <p><b>온실 효과</b> : 햇빛에 데워진 땅이 내보내는 열을 공기 속 기체가 붙잡아, 지구를 따뜻하게 하는 현상</p>
+      <p><b>온실 가스</b> : 열을 붙잡는 기체 — 이산화 탄소 · 메테인 · 수증기. 온실 효과가 없으면 지구 평균 기온은 약 영하 18℃예요.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>실험 : 온실 효과 페트병</h2>
+    <div class="stage">
+      <svg id="bt" viewBox="0 0 640 330" role="img" aria-label="적외선 램프 앞에 놓인 병 A 공기 병과 병 B 이산화 탄소 병">
+        <defs><radialGradient id="glow"><stop offset="0" stop-color="#ffd84d" stop-opacity=".85"/><stop offset="1" stop-color="#ffd84d" stop-opacity="0"/></radialGradient></defs>
+        <rect width="640" height="330" fill="#fffaf0"/>
+        <circle id="glowC" class="fade" cx="320" cy="70" r="230" fill="url(#glow)" opacity="0"/>
+        <rect x="314" y="0" width="12" height="16" fill="#7a8796"/>
+        <path d="M282 14 h76 l26 44 h-128 z" fill="#ff8a3d"/>
+        <ellipse cx="320" cy="62" rx="32" ry="13" fill="#fff4c2" stroke="#e0661c" stroke-width="3"/>
+        <text x="320" y="104" font-size="18" fill="#a2531a" text-anchor="middle">적외선 램프</text>
+        <g id="bottles"></g>
+        <text id="clk" x="320" y="222" font-size="34" fill="#24407e" text-anchor="middle">0분</text>
+        <text x="320" y="248" font-size="16" fill="#6c7a8a" text-anchor="middle">데운 시간</text>
+      </svg>
+    </div>
+    <div class="btns one"><button class="bbtn warm" id="heat">20분 데우기</button></div>
+    <p class="say" id="btSay"></p>
+    <div class="note"><p>화면의 숫자는 <b>영상 실험 예</b>예요 : 처음 26℃ → 20분 뒤 공기 병 31℃ · 이산화 탄소 병 32.5℃.</p><p>실제로 해 보면 두 병의 차이는 1~2℃쯤으로 작아요. 두 병 모두 물 50mL를 넣어서, 다른 점은 이산화 탄소 하나뿐이에요.</p></div>
+  </div>
+  </div>
+</section>
+
+<!-- ② 얼음 녹이기 -->
+<section class="panel" id="p1">
+  <div class="card">
+    <h2>땅 위 얼음과 물에 뜬 얼음, 녹으면 어떻게 될까?</h2>
+    <div class="btns">
+      <button class="bbtn warm" id="melt">녹이기</button>
+      <button class="bbtn" id="add">얼음 하나 더 넣기 (컵 B)</button>
+      <button class="bbtn white" id="icReset">처음부터</button>
+    </div>
+    <div class="stage">
+      <svg id="ic" viewBox="0 0 640 400" role="img" aria-label="컵 A 주사위 위 얼음과 컵 B 물에 뜬 얼음, 물 높이 선과 집 스티커">
+        <defs>
+          <g id="house"><path d="M-3 -30 L21 -50 L45 -30 Z" fill="#ff8a3d" stroke="#e0661c" stroke-width="2" stroke-linejoin="round"/><rect x="0" y="-30" width="42" height="30" fill="#ffd23f" stroke="#e0a800" stroke-width="2"/><rect x="16" y="-17" width="10" height="17" fill="#b5651d"/><rect x="5" y="-25" width="8" height="8" fill="#9fd3f0"/></g>
+        </defs>
+        <rect width="640" height="400" fill="#f6fbff"/>
+        <!-- 컵 A -->
+        <rect x="40" y="70" width="250" height="280" rx="14" fill="#fff"/>
+        <use href="#house" x="234" y="230"/>
+        <rect x="100" y="232" width="118" height="118" rx="10" fill="#fff" stroke="#9aa9b8" stroke-width="3"/>
+        <g fill="#24407e"><circle cx="126" cy="258" r="9"/><circle cx="159" cy="291" r="9"/><circle cx="192" cy="324" r="9"/></g>
+        <rect id="iA" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
+        <rect id="wA" x="43" width="244" fill="#3b8fe0" opacity=".5"/>
+        <!-- 컵 B -->
+        <rect x="350" y="70" width="250" height="280" rx="14" fill="#fff"/>
+        <use href="#house" x="544" y="230"/>
+        <rect id="iB1" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
+        <rect id="iB2" rx="8" fill="#e8f7ff" stroke="#8fcbed" stroke-width="3"/>
+        <rect id="wB" x="353" width="244" fill="#3b8fe0" opacity=".5"/>
+        <!-- 선 · 컵 테두리 · 글 -->
+        <g stroke="#24407e" stroke-width="3" stroke-dasharray="10 6"><line x1="40" y1="232" x2="290" y2="232"/><line x1="350" y1="232" x2="600" y2="232"/></g>
+        <text x="48" y="226" font-size="15" fill="#24407e">물 높이 선</text>
+        <g fill="none" stroke="#8cc4e8" stroke-width="5"><path d="M40 70 V336 Q40 350 54 350 H276 Q290 350 290 336 V70"/><path d="M350 70 V336 Q350 350 364 350 H586 Q600 350 600 336 V70"/></g>
+        <text id="stA" x="165" y="50" font-size="21" text-anchor="middle"></text>
+        <text id="stB" x="475" y="50" font-size="21" text-anchor="middle"></text>
+        <g font-size="21" fill="#24407e" text-anchor="middle"><text x="165" y="384">컵 A 주사위 위 얼음</text><text x="475" y="384">컵 B 물에 뜬 얼음</text></g>
+      </svg>
+    </div>
+    <p class="say" id="icSay"></p>
+    <div class="note"><p><b>주사위</b>는 땅, <b>파란 물</b>은 바다, <b>집 스티커</b>는 바닷가 마을이에요.</p><p><b>해수면 상승</b> : 바닷물 높이가 올라가는 것 — 땅 위 빙하 · 빙상이 녹은 물이 바다로 흘러 들어서 생겨요.</p></div>
+  </div>
+</section>
+
+<!-- ③ 남극과 그린란드 -->
+<section class="panel" id="p2">
+  <div class="card">
+    <h2>얼음이 다 녹으면 바닷물은 얼마나 높아질까?</h2>
+    <div class="btns" id="sheet">
+      <button class="bbtn white" data-m="g">그린란드 빙상이 다 녹으면</button>
+      <button class="bbtn white" data-m="a">남극 빙상이 다 녹으면</button>
+      <button class="bbtn white" data-m="n">북극 해빙이 녹으면</button>
+    </div>
+    <div class="stage">
+      <svg id="sl" viewBox="0 0 480 450" role="img" aria-label="바닷물 높이 막대와 건물 층 높이 견주기">
+        <defs><linearGradient id="slSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6ecff"/><stop offset="1" stop-color="#f4fbff"/></linearGradient></defs>
+        <rect width="480" height="450" fill="url(#slSky)"/>
+        <rect x="48" y="400" width="256" height="50" fill="#3b8fe0" opacity=".75"/>
+        <path d="M300 400 H480 V450 H304 Z" fill="#8fd18a"/>
+        <rect x="302" y="414" width="178" height="36" fill="#c99a6b"/>
+        <g id="bld"></g>
+        <g id="floe" opacity="0" transform="translate(-36 -198) scale(1.5)">
+          <rect id="floeR" x="60" y="392" width="160" height="14" rx="5" fill="#fff" stroke="#a8d4ef" stroke-width="3"/>
+          <g id="seal"><ellipse cx="196" cy="386" rx="17" ry="6.5" fill="#8a96a3"/><circle cx="211" cy="381" r="5.5" fill="#8a96a3"/><circle cx="213" cy="380" r="1.3" fill="#33414f"/></g>
+          <g stroke="#9aa9b8" stroke-width="2" fill="#fffdf5"><rect x="96" y="378" width="7" height="15" rx="3"/><rect x="122" y="378" width="7" height="15" rx="3"/><ellipse cx="113" cy="374" rx="23" ry="13"/><circle cx="138" cy="364" r="10"/><circle cx="135" cy="355" r="3.5"/></g>
+          <circle cx="147" cy="365" r="2" fill="#33414f"/><circle cx="140" cy="361" r="1.4" fill="#33414f"/>
+        </g>
+        <rect id="flood" x="48" y="400" width="432" height="0" fill="#3b8fe0" opacity=".45"/>
+        <line x1="48" y1="400" x2="480" y2="400" stroke="#24407e" stroke-width="2" stroke-dasharray="6 6"/>
+        <text x="56" y="424" font-size="16" fill="#fff">지금 해수면</text>
+        <line id="mark" x1="44" x2="446" y1="400" y2="400" stroke="#e0661c" stroke-width="4" opacity="0"/>
+        <g id="ruler" font-size="14" fill="#33414f" text-anchor="end"></g>
+        <g id="callout">
+          <rect x="60" y="54" width="186" height="76" rx="14" fill="#fff" stroke="#ff8a3d" stroke-width="3"/>
+          <text id="coBig" x="153" y="88" font-size="27" fill="#e0661c" text-anchor="middle"></text>
+          <text id="coSub" x="153" y="116" font-size="17" fill="#24407e" text-anchor="middle"></text>
+        </g>
+      </svg>
+    </div>
+    <p class="say" id="slSay"></p>
+    <div class="note"><p><b>빙상</b> : 땅을 넓게 덮은 아주 큰 빙하 — 지금 지구에는 남극과 그린란드 두 곳에만 있어요.</p><p><b>해빙</b> : 바닷물이 언 얼음 — 북극 바다는 해빙으로 덮여 있어요. 건물 한 층은 약 3m로 어림했어요.</p></div>
+  </div>
+</section>
+
+<!-- ④ OX -->
+<section class="panel" id="p3">
+  <div class="quiz">
+    <div class="score"><span id="qn">1</span> / <span id="qt"></span> · 맞힌 수 <b id="sc">0</b></div>
+    <div class="q" id="q"></div>
+    <div class="ox" id="ox"><button class="o" data-a="O">O</button><button class="x" data-a="X">X</button></div>
+    <div class="fb" id="qfb"></div>
+    <div class="row"><button class="bbtn" id="qnext" hidden>다음 문제</button></div>
+  </div>
+</section>
+</main>
+
+<footer><span>어게인 실험과학 수학학원</span> · <span>교육문의 010.2976.5774</span></footer>
+<div class="toast" id="toast">주소가 복사됐어요</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const NS='http://www.w3.org/2000/svg';
+const lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t<.5?2*t*t:1-(-2*t+2)**2/2;
+const attr=(el,o)=>{ for(const k in o) el.setAttribute(k,o[k]); return el; };
+const mk=(tag,o,parent)=>{ const e=attr(document.createElementNS(NS,tag),o); if(parent) parent.append(e); return e; };
+// fn(eased, raw) 를 ms 동안 부름. alive()가 거짓이 되면 멈추고 false
+function tween(ms,fn,alive=()=>true){ return new Promise(res=>{ const t0=performance.now();
+  const step=now=>{ if(!alive()) return res(false); const t=Math.min(1,(now-t0)/ms); fn(ease(t),t); t<1?requestAnimationFrame(step):res(true); };
+  requestAnimationFrame(step); }); }
+
+/* ---------- 반짝이 ---------- */
+function confetti(){
+  const cols=['#3a9ae0','#ff8a3d','#24407e','#ffd23f','#8fdcb8'];
+  for(let i=0;i<70;i++){ const d=document.createElement('div'); d.className='conf';
+    d.style.left=Math.random()*100+'vw'; d.style.background=cols[i%5]; d.style.borderRadius=i%2?'50%':'3px';
+    d.style.animationDuration=1.4+Math.random()*1.6+'s'; d.style.animationDelay=Math.random()*.4+'s';
+    document.body.appendChild(d); setTimeout(()=>d.remove(),3600); }
+}
+function sparkleAt(x,y,n=14){
+  for(let i=0;i<n;i++){ const s=document.createElement('span'), a=i/n*Math.PI*2, d=70+Math.random()*90;
+    s.className='spk'; s.textContent='✦'; s.style.left=x+'px'; s.style.top=y+'px';
+    s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',Math.sin(a)*d+'px');
+    s.style.color=['#ffc93c','#ff8a3d','#3a9ae0'][i%3]; document.body.appendChild(s); setTimeout(()=>s.remove(),1000); }
+}
+
+/* ---------- 탭 · 공유 ---------- */
+let cur=0;
+function showTab(t){ cur=t; $$('.tab').forEach((b,j)=>b.classList.toggle('on',j===t)); $$('.panel').forEach((p,j)=>p.classList.toggle('on',j===t)); }
+$$('.tab').forEach(b=>b.onclick=()=>showTab(+b.dataset.t));
+$('#share').onclick=async()=>{
+  const url=location.href;
+  if(navigator.share){ try{ await navigator.share({title:document.title,url}); return; }catch(e){ if(e.name==='AbortError') return; } }
+  try{ await navigator.clipboard.writeText(url); }
+  catch(e){ const t=document.createElement('textarea'); t.value=url; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  const el=$('#toast'); el.classList.add('on'); setTimeout(()=>el.classList.remove('on'),1800);
+};
+
+/* ---------- ① 온실 효과 ---------- */
+const LV=[
+  {n:4, trap:2,f:.3, haze:.08,word:'덜 따뜻해요',say:'이산화 탄소가 적으면 붙잡히는 열이 적어요. 땅이 내보내는 열 화살표 6개 중 4개가 우주로 빠져나가요.'},
+  {n:9, trap:3,f:.55,haze:.18,word:'따뜻해요',  say:'지금 공기 속 이산화 탄소는 200여 년 전의 약 1.5배예요. 열 화살표 6개 중 3개가 공기에 갇혀 땅으로 되돌아와요.'},
+  {n:18,trap:5,f:.85,haze:.32,word:'더 더워져요',say:'온실 가스가 늘면 열이 더 많이 갇혀 지구가 더워져요. 6개 중 5개가 갇혀요. 이렇게 지구 평균 기온이 점점 올라가는 것이 지구 온난화예요.'},
+];
+let seed=11; const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+const mols=[...Array(18)].map((_,k)=>{ const c=k*5%18;   // 앞쪽 몇 개만 보여도 고르게 퍼지도록
+  return mk('use',{href:'#mol',class:'mol fade',x:105+(c%6)*76+rnd()*30,y:104+Math.floor(c/6)*28+rnd()*12,style:`animation-delay:-${(rnd()*2.6).toFixed(2)}s`},$('#mols')); });
+const XS=[150,215,280,345,410,475], ORDER=[1,4,2,5,0,3], P=3400;
+const arrows=XS.map((x,i)=>({x,i,ph:i/6,pt:1,trap:false,el:mk('use',{href:'#heatA'},$('#arrows'))}));
+let lv=1, fT=LV[1].f;
+function ghLoop(now){
+  requestAnimationFrame(ghLoop);
+  if(cur!==0) return;
+  for(const a of arrows){
+    const t=(now/P+a.ph)%1;
+    if(t<a.pt) a.trap=ORDER.indexOf(a.i)<LV[lv].trap;   // 한 바퀴가 끝날 때만 바꿔서 순간 이동이 없게
+    a.pt=t;
+    let x=a.x,y,r=0,col='#ff7a2b';
+    if(!a.trap) y=250-300*t;
+    else if(t<.45) y=250-120*t/.45;
+    else { const u=(t-.45)/.55; y=130+156*u; x+=24*u; r=180; col='#e5392b'; }
+    attr(a.el,{transform:`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r}) scale(1.4)`,opacity:Math.min(1,t/.06,(1-t)/.06).toFixed(2)});
+    a.el.style.color=col;
+  }
+  fT+=(LV[lv].f-fT)*.05;
+  const top=290-178*fT; attr($('#thFill'),{y:top.toFixed(1),height:(310-top).toFixed(1)});
+}
+requestAnimationFrame(ghLoop);
+function setLv(v){
+  lv=v; $$('#co2 .bbtn').forEach(b=>b.classList.toggle('on',+b.dataset.v===v));
+  mols.forEach((m,k)=>m.style.opacity=k<LV[v].n?1:0); $('#haze').style.opacity=LV[v].haze;
+  $('#ghSay').innerHTML=`<b>지구 온도 : ${LV[v].word}</b><br>${LV[v].say}`;
+}
+$$('#co2 .bbtn').forEach(b=>b.onclick=()=>setLv(+b.dataset.v));
+setLv(1);
+
+// 페트병 실험
+const BX={A:170,B:470};
+$('#bottles').innerHTML=Object.entries(BX).map(([k,cx])=>`
+  <path d="M${cx-22} 112 V128 Q${cx-62} 140 ${cx-62} 180 V280 Q${cx-62} 300 ${cx-40} 300 H${cx+40} Q${cx+62} 300 ${cx+62} 280 V180 Q${cx+62} 140 ${cx+22} 128 V112 Z" fill="#e9f6ff" stroke="#8cc4e8" stroke-width="4"/>
+  <rect x="${cx-56}" y="274" width="112" height="22" rx="10" fill="#9fd0f5"/>
+  ${k==='A'?`<text x="${cx-34}" y="220" font-size="22" fill="#6c7a8a" text-anchor="middle">공기</text><text x="${cx+34}" y="220" font-size="22" fill="#6c7a8a" text-anchor="middle">공기</text>`
+    :`<use href="#mol" x="${cx-30}" y="190"/><use href="#mol" x="${cx+28}" y="204"/><use href="#mol" x="${cx-24}" y="236"/><use href="#mol" x="${cx+30}" y="250"/>`}
+  <rect x="${cx-5}" y="20" width="10" height="246" rx="5" fill="#fff" stroke="#aab8c6" stroke-width="2"/>
+  <g stroke="#aab8c6" stroke-width="2">${[24,26,28,30,32,34].map(T=>`<line x1="${cx-13}" x2="${cx-7}" y1="${90-(T-24)*6.4}" y2="${90-(T-24)*6.4}"/>`).join('')}</g>
+  <rect id="col${k}" x="${cx-2.5}" width="5" fill="#ef4b3c"/>
+  <circle cx="${cx}" cy="268" r="9" fill="#ef4b3c"/>
+  <rect x="${cx-26}" y="96" width="52" height="22" rx="5" fill="#7b4a2e"/>
+  <text id="rl${k}" x="${cx+18}" y="40" font-size="16" fill="#6c7a8a">처음</text>
+  <text id="rd${k}" x="${cx+18}" y="74" font-size="32" fill="#33414f">26℃</text>
+  <text x="${cx}" y="324" font-size="21" fill="#24407e" text-anchor="middle">병 ${k} ${k==='A'?'공기 병':'이산화 탄소 병'}</text>`).join('');
+const setCol=(k,T)=>{ const y=90-(T-24)*6.4; attr($('#col'+k),{y:y.toFixed(1),height:(266-y).toFixed(1)}); };
+let btState=0;   // 0 준비 · 1 데우는 중 · 2 끝
+function btReset(){
+  btState=0; setCol('A',26); setCol('B',26); $('#clk').textContent='0분';
+  for(const k of 'AB'){ $('#rl'+k).textContent='처음'; $('#rd'+k).textContent='26℃'; $('#rd'+k).setAttribute('fill','#33414f'); }
+  $('#heat').textContent='20분 데우기';
+  $('#btSay').textContent='두 병을 램프 앞에 나란히 두었어요. 어느 병이 더 뜨거워질까요?';
+}
+$('#heat').onclick=async()=>{
+  if(btState===1) return;
+  if(btState===2) return btReset();
+  btState=1; $('#heat').disabled=true; $('#glowC').style.opacity=1;
+  for(const k of 'AB'){ $('#rl'+k).textContent='데우는 중'; $('#rd'+k).textContent='…'; }
+  $('#btSay').textContent='램프를 켰어요. 두 병을 똑같이 데우는 중이에요.';
+  await tween(5000,(e,t)=>{ setCol('A',26+5*e); setCol('B',26+6.5*e); $('#clk').textContent=Math.round(20*t)+'분'; });
+  $('#glowC').style.opacity=0;
+  for(const k of 'AB') $('#rl'+k).textContent='20분 뒤';
+  $('#rdA').textContent='31℃'; $('#rdB').textContent='32.5℃'; $('#rdB').setAttribute('fill','#e0661c');
+  $('#btSay').innerHTML='똑같이 20분 데웠는데, 병 B의 온도계 눈금이 병 A보다 더 높았어요.<br><b>병 B 속 이산화 탄소가 열을 붙잡았어요.</b>';
+  $('#heat').textContent='처음부터'; $('#heat').disabled=false; btState=2;
+};
+btReset();
+
+/* ---------- ② 얼음 녹이기 ---------- */
+const L=232, D=24, IW=70, IH=56, AX=159, B1=480, B2=398;
+let ic, icRun=0, icBusy=false;
+function iceRect(el,cx,v,topOf){
+  const s=Math.cbrt(Math.max(0,v));
+  if(s<.04){ el.style.display='none'; return; }
+  el.style.display=''; attr(el,{x:(cx-IW*s/2).toFixed(1),y:topOf(s).toFixed(1),width:(IW*s).toFixed(1),height:(IH*s).toFixed(1)});
+}
+function icDraw(){
+  const lvA=L-ic.rA, lvB=L-ic.rB;
+  attr($('#wA'),{y:lvA,height:347-lvA}); attr($('#wB'),{y:lvB,height:347-lvB});
+  iceRect($('#iA'),AX,ic.a,s=>L-IH*s);                 // 주사위 윗면에 얹힘
+  iceRect($('#iB1'),B1,ic.b1,s=>lvB-.12*IH*s);          // 물에 떠서 조금만 위로 나옴
+  if(ic.b2===null) $('#iB2').style.display='none';
+  else iceRect($('#iB2'),B2,ic.b2,s=>ic.b2top??lvB-.12*IH*s);
+}
+function stat(id,text,color){ $(id).textContent=text; $(id).setAttribute('fill',color); }
+function icButtons(){
+  const left=ic.a>0||ic.b1>0||(ic.b2!==null&&ic.b2>0);
+  $('#melt').disabled=icBusy||!left; $('#add').disabled=icBusy||ic.b2!==null;
+}
+function icReset(){
+  icRun++; icBusy=false; ic={a:1,b1:1,b2:null,b2top:null,rA:0,rB:0};
+  stat('#stA','',''); stat('#stB','','');
+  $('#icSay').textContent='컵 A는 주사위(땅) 위에, 컵 B는 물(바다) 위에 얼음을 놓았어요. 집 스티커는 물 높이 선 바로 위에 붙였어요. ‘녹이기’를 눌러 봐요!';
+  icDraw(); icButtons();
+}
+$('#icReset').onclick=icReset;
+$('#melt').onclick=async()=>{
+  if(icBusy) return; icBusy=true; icButtons();
+  const run=icRun, a0=ic.a, b10=ic.b1, b20=ic.b2, hadA=a0>0;
+  if(hadA) stat('#stA','녹는 중…','#6c7a8a'); stat('#stB','녹는 중…','#6c7a8a');
+  const ok=await tween(5000,e=>{ ic.a=a0*(1-e); ic.rA=D*(1-ic.a); ic.b1=b10*(1-e); if(b20!==null) ic.b2=b20*(1-e); icDraw(); },()=>run===icRun);
+  if(!ok) return;
+  stat('#stA','물이 올라 집이 잠겼어요!','#c8283a');
+  const added=ic.b2!==null;
+  stat('#stB',added?'녹아도 물 높이 그대로예요':'선 그대로예요','#1f8a57');
+  $('#icSay').innerHTML=!added
+    ?'주사위 위 얼음이 녹자 컵 A의 물이 집 스티커 위로 올라왔지만, 컵 B는 선 그대로였어요.<br><b>땅 위의 얼음이 녹아 바다로 흘러 들면 해수면이 높아져요.</b>'
+    :(hadA?'주사위 위 얼음이 녹자 컵 A의 물이 집 스티커 위로 올라왔어요. ':'')+'컵 B는 얼음이 다 녹아도 물 높이가 그대로예요.<br><b>바다에 들어올 때 이미 녹을 물만큼 물을 밀어 올렸기 때문이에요.</b>';
+  icBusy=false; icButtons();
+};
+$('#add').onclick=async()=>{
+  if(icBusy||ic.b2!==null) return; icBusy=true; const run=icRun, alive=()=>run===icRun;
+  ic.b2=1; icButtons();
+  const touch=L-ic.rB-IH;                                  // 얼음 밑면이 물에 닿는 자리
+  if(!await tween(520,(e,t)=>{ ic.b2top=lerp(-IH,touch,t*t); icDraw(); },alive)) return;
+  const r0=ic.rB, fin=L-(r0+D)-.12*IH;
+  if(!await tween(420,e=>{ ic.rB=r0+D*e; ic.b2top=lerp(touch,fin,e); icDraw(); },alive)) return;
+  ic.b2top=null; icDraw();
+  stat('#stB','넣는 순간 물이 올라갔어요!','#e0661c');
+  $('#icSay').innerHTML='얼음을 넣는 순간 컵 B의 물 높이가 올라갔어요!<br><b>바다에 들어오는 순간 이미 물을 밀어 올려요.</b> 그래서 녹아도 더 오르지 않아요.';
+  icBusy=false; icButtons();
+};
+icReset();
+
+/* ---------- ③ 남극과 그린란드 ---------- */
+const PX=6, SEA=400;   // 1m = 6px, 지금 해수면 y=400
+(()=>{ // 자 · 건물(한 층 약 3m = 18px)
+  const R=$('#ruler'); mk('line',{x1:44,x2:44,y1:SEA-60*PX,y2:SEA,stroke:'#33414f','stroke-width':2},R);
+  for(let m=0;m<=60;m+=10){ const y=SEA-m*PX; mk('line',{x1:38,x2:50,y1:y,y2:y,stroke:'#33414f','stroke-width':2},R); mk('text',{x:36,y:y+5},R).textContent=m+'m'; }
+  const B=$('#bld'); mk('rect',{x:360,y:SEA-60*PX,width:80,height:60*PX,fill:'#fff3dc',stroke:'#c98a3a','stroke-width':3},B);
+  for(let f=1;f<=20;f++){ const y=SEA-f*18; if(f<20) mk('line',{x1:360,x2:440,y1:y,y2:y,stroke:'#e7c58f','stroke-width':1.5},B);
+    for(let w=0;w<3;w++) mk('rect',{x:366+w*25,y:y+5,width:18,height:9,rx:2,fill:'#9fd3f0'},B);
+    if(f===1||f%5===0){ mk('text',{x:446,y:y+14,'font-size':14,fill:'#8a5a1a'},B).textContent=f+'층'; } }
+})();
+const SH={
+  g:{h:7.4,big:'약 7.4m',sub:'건물 약 2~3층 높이',say:'그린란드 빙상이 다 녹으면 해수면은 약 7.4m 올라가요.<br>한 층을 약 3m로 어림하면 <b>건물 약 2~3층 높이</b>예요.'},
+  a:{h:58, big:'약 58m', sub:'건물 약 19층 높이',say:'남극 빙상이 다 녹으면 해수면은 약 58m 올라가요.<br>한 층을 약 3m로 어림하면 <b>건물 약 19층 높이</b>예요.'},
+  n:{h:0,  big:'거의 그대로',sub:'북극곰의 사냥터가 줄어요',say:'북극 해빙이 녹으면 해수면은 거의 그대로예요. 바다에 들어올 때 이미 녹을 물만큼 바닷물을 밀어 올렸기 때문이에요.<br><b>하지만 북극곰은 해빙 위에서 물범을 사냥하던 곳을 잃어요.</b>'},
+};
+let slH=0, slRun=0;
+function setFlood(h){ slH=h; const y=SEA-h*PX; attr($('#flood'),{y,height:h*PX}); attr($('#mark'),{y1:y,y2:y,opacity:h>.3?1:0}); }
+function setFloe(e){ attr($('#floeR'),{x:lerp(60,88,e),width:lerp(160,56,e)}); $('#seal').style.opacity=Math.max(0,1-Math.max(0,e-.3)*4); }
+function slIntro(){
+  $('#coBig').textContent='버튼을 눌러 봐요'; $('#coSub').textContent='얼음이 녹으면 바닷물은?';
+  $('#slSay').innerHTML='남극과 그린란드의 <b>빙상</b>은 땅 위 얼음, 북극 바다의 <b>해빙</b>은 바다에 뜬 얼음이에요.';
+}
+$$('#sheet .bbtn').forEach(b=>b.onclick=async()=>{
+  const m=b.dataset.m, S=SH[m], run=++slRun, alive=()=>run===slRun;
+  $$('#sheet .bbtn').forEach(x=>x.classList.toggle('on',x===b));
+  $('#coBig').textContent='…'; $('#coSub').textContent=''; $('#slSay').innerHTML='&nbsp;';
+  $('#floe').style.opacity=0; setFloe(0);
+  const h0=slH;
+  if(!await tween(Math.min(3600,700+Math.abs(S.h-h0)*50),e=>setFlood(lerp(h0,S.h,e)),alive)) return;
+  if(m==='n'){
+    $('#floe').style.opacity=1;
+    if(!await tween(500,()=>{},alive)) return;
+    if(!await tween(2600,e=>setFloe(e),alive)) return;
+  }
+  $('#coBig').textContent=S.big; $('#coSub').textContent=S.sub; $('#slSay').innerHTML=S.say;
+});
+setFlood(0); slIntro();
+
+/* ---------- ④ OX ---------- */
+const OX=[
+  ['기후는 그날그날의 날씨를 말한다.',false,'그날그날의 상태는 날씨예요. 기후는 한 지역에서 30년 넘게 되풀이되는 평균 날씨예요.'],
+  ['이산화 탄소는 열을 붙잡는 온실 가스이다.',true,'이산화 탄소 · 메테인 · 수증기처럼 열을 붙잡는 기체가 온실 가스예요.'],
+  ['온실 효과가 없으면 지구는 지금보다 훨씬 추워진다.',true,'온실 효과가 없으면 지구 평균 기온은 약 영하 18℃예요.'],
+  ['북극 바다에 뜬 해빙이 녹으면 해수면이 크게 올라간다.',false,'바다에 뜬 해빙은 녹아도 해수면이 거의 그대로예요. 바다에 들어올 때 이미 녹을 물만큼 바닷물을 밀어 올렸어요.'],
+  ['남극과 그린란드의 빙상이 녹으면 해수면이 올라간다.',true,'땅 위의 빙상이 녹은 물이 바다로 흘러 들어 해수면이 높아져요.'],
+];
+let qi=0, score=0;
+$('#qt').textContent=OX.length;
+function showQ(){
+  $('#ox').hidden=false; $('#qn').textContent=qi+1; $('#sc').textContent=score; $('#q').textContent=OX[qi][0];
+  $('#qfb').textContent=''; $('#qfb').className='fb'; $('#qnext').hidden=true; $$('#ox button').forEach(b=>b.disabled=false);
+}
+$$('#ox button').forEach(b=>b.onclick=()=>{
+  const [,yes,why]=OX[qi], ans=yes?'O':'X', ok=b.dataset.a===ans; $$('#ox button').forEach(x=>x.disabled=true);
+  if(ok){ score++; const r=b.getBoundingClientRect(); sparkleAt(r.left+r.width/2,r.top+r.height/2); }
+  $('#sc').textContent=score; $('#qfb').className='fb '+(ok?'good':'bad');
+  $('#qfb').textContent=(ok?'딩동댕! ':`아쉬워요. 정답은 ${ans}예요. `)+why;
+  $('#qnext').textContent=qi<OX.length-1?'다음 문제':'결과 보기'; $('#qnext').hidden=false;
+});
+$('#qnext').onclick=()=>{
+  if(qi===OX.length){ qi=0; score=0; showQ(); return; }
+  if(++qi<OX.length){ showQ(); return; }
+  $('#q').textContent=`${OX.length}문제 중 ${score}문제를 맞혔어요!`; $('#ox').hidden=true; $('#qfb').className='fb good';
+  $('#qfb').textContent=score===OX.length?'완벽해요! 모두 맞혔어요.':score>=OX.length-2?'잘했어요! 틀린 문제는 앞의 탭에서 다시 눌러 봐요.':'괜찮아요. 앞의 탭을 다시 눌러 보고 또 도전해요!';
+  $('#qnext').textContent='다시 하기'; if(score===OX.length) confetti();
+};
+showQ();
+
+/* ---------- 시작 (주소 끝 #tab1~#tab4 로 처음 탭 고르기) ---------- */
+const hashTab=location.hash.match(/^#tab([1-4])$/);
+showTab(hashTab?hashTab[1]-1:0);
+</script>
+</body>
+</html>
